@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.10.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<groupId>ru.efive.esb</groupId>
+	<artifactId>test-spring</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>test-spring</name>
+	<description>Demo project for Spring Boot</description>
+	<packaging>bundle</packaging>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>6.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Bundle-Version>${project.version}</Bundle-Version>
+						<Bundle-Activator>ru.efive.esb.testspring.SpringBootBundleActivator</Bundle-Activator>
+						<Export-Package>
+							ru.efive.esb.testspring,
+							org.springframework.boot.*
+						</Export-Package>
+						<Private-Package>ru.efive.esb.testspring.*</Private-Package>
+						<Import-Package>
+							org.osgi.framework,
+							org.springframework.core.*,
+							org.springframework.util.*,
+							org.springframework.context.*,
+							org.springframework.beans.*,
+							org.springframework.aop.*,
+							org.springframework.stereotype.*,
+							org.xml.sax,
+							javax.xml.*,
+							org.apache.commons.logging.*
+						</Import-Package>
+						<Embed-Dependency>
+							org.springframework.boot.*
+						</Embed-Dependency>
+						<Embed-Transitive>true</Embed-Transitive>
+						<Require-Capability>osgi.ee;filter:="(&amp;(osgi.ee=JavaSE)(version=1.8))"</Require-Capability>
+					</instructions>
+					<buildDirectory>target/deploy</buildDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>8</source>
+					<target>8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
