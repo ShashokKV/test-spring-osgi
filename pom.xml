@@ -41,12 +41,6 @@
 	</dependencies>
 
 	<build>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
@@ -71,6 +65,8 @@
 							org.springframework.beans.*,
 							org.springframework.aop.*,
 							org.springframework.stereotype.*,
+                            org.springframework.cglib.core,
+                            org.springframework.cglib.proxy,
 							org.xml.sax,
 							javax.xml.*,
 							org.apache.commons.logging.*
